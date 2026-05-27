@@ -1,0 +1,17 @@
+services:
+  trueques-backend:
+    container_name: trueques-backend
+    build:
+      context: ./backend
+    ports:
+      - "3003:3003"
+    env_file:
+      - ./backend/.env
+    networks:
+      - nodo-network
+    restart: unless-stopped
+
+networks:
+  nodo-network:
+    external: true
+    name: infra_default

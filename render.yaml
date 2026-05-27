@@ -1,0 +1,43 @@
+databases:
+  - name: trueques-db
+    databaseName: trueques_db
+    user: trueques_user
+
+services:
+  - type: web
+    name: trueques-comunitarios
+    runtime: node
+    plan: free
+    buildCommand: cd backend && npm ci && cd ../frontend && npm ci && npm run build
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3003
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DB_HOST
+        fromDatabase:
+          name: trueques-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: trueques-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: trueques-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: trueques-db
+          property: user
+      - key: DB_PASS
+        fromDatabase:
+          name: trueques-db
+          property: password
+      - key: ALLOW_DEMO_LOGIN
+        value: true
+      - key: ALLOW_DEV_TOKEN
+        value: false

@@ -1,0 +1,5 @@
+node_modules/
+.env
+*.log
+
+# Nota: uploads se conserva para imágenes iniciales de la demo.
